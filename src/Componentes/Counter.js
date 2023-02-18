@@ -2,7 +2,7 @@ import React from "react";
 
 class Counter extends React.Component {
   static defaultProps = {
-    initialValue: 12,
+    initialValue: 0,
   };
 
   static propTypes = {};
@@ -38,5 +38,9 @@ class Counter extends React.Component {
     );
   }
 }
+
+// Counter.defaultProps = {
+//     initialValue: 0
+// }
 
 export default Counter;
