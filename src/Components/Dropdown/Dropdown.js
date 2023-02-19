@@ -10,23 +10,23 @@ class Dropdown extends Component {
     this.setState((prevState) => ({ visible: !prevState.visible }));
   };
 
-  show = () => {
-    this.setState({ visible: true });
-  };
+  //   show = () => {
+  //     this.setState({ visible: true });
+  //   };
 
-  hide = () => {
-    this.setState({ visible: false });
-  };
+  //   hide = () => {
+  //     this.setState({ visible: false });
+  //   };
 
   render() {
     return (
       <div className="Dropdown">
-        <button type="button" className="Dropdown__toggle" onClick={this.show}>
+        {/* <button type="button" className="Dropdown__toggle" onClick={this.show}>
           Show
         </button>
         <button type="button" className="Dropdown__toggle" onClick={this.hide}>
           Hide
-        </button>
+        </button> */}
         <button
           type="button"
           className="Dropdown__toggle"
