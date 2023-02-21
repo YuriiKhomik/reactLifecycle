@@ -3,7 +3,7 @@ import "./TodoList.css";
 const TodoList = ({ todos, onDeleteTodo }) => {
   return (
     <ul className="TodoList">
-      {todos.map(({ id, text, completed }) => {
+      {todos.map(({ id, text }) => {
         return (
           <li key={id} className="TodoList__item">
             <p className="TodoList__text">{text}</p>{" "}
@@ -16,3 +16,18 @@ const TodoList = ({ todos, onDeleteTodo }) => {
 };
 
 export default TodoList;
+
+// const TodoList = ({ todos, onDeleteTodo }) => {
+//   return (
+//     <ul className="TodoList">
+//       {todos.map(({ id, text, completed }) => {
+//         return (
+//           <li key={id} className="TodoList__item">
+//             <p className="TodoList__text">{text}</p>{" "}
+//             <button onClick={() => onDeleteTodo(id)}>delete</button>
+//           </li>
+//         );
+//       })}
+//     </ul>
+//   );
+// };
