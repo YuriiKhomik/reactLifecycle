@@ -1,62 +1,35 @@
 // import Counter from "./Components/Counter";
 // import Dropdown from "./Components/Dropdown";
-// import ColorPicker from "./Components/Colorpicker";
-// import colorPickerOptions from "./Components/Colorpicker/colorPickerOptions";
+import ColorPicker from "./Components/Colorpicker";
+import colorPickerOptions from "./Components/Colorpicker/colorPickerOptions";
 import { Component } from "react";
 // import TodoList from "./Components/TodoList";
 import initialTodos from "./Components/TodoList/todos.json";
+import Form from "./Components/Form";
 
 class App extends Component {
   state = {
-    todos: initialTodos,
-    name: "",
-    secondName: "",
+    // todos: initialTodos,
   };
 
-  deleteTodo = (todoId) => {
-    this.setState((prevState) => ({
-      todos: prevState.todos.filter((todo) => todo.id !== todoId),
-    }));
+  formSubmitHandler = (submitData) => {
+    console.log(submitData);
   };
-
-  handleNameChange = (e) => {
-    this.setState({ name: e.currentTarget.value });
-  };
-
-  // handleSecondNameChange = (e) => {
-  //   this.setState({ secondName: e.currentTarget.value });
-  // };
-
-  // handleChange = (e) => {
-  //   const { name, value } = e.currentTarget;
-  //   this.setState({
-  //     [name]: value,
-  //   });
+  // deleteTodo = (todoId) => {
+  //   this.setState((prevState) => ({
+  //     todos: prevState.todos.filter((todo) => todo.id !== todoId),
+  //   }));
   // };
 
   render() {
+    // return (
+    //   <>
+    //     <Form onSubmit={this.formSubmitHandler} />
+    //   </>
+    // );
     return (
       <>
-        <form>
-          <label>
-            name{" "}
-            <input
-              name="name"
-              type="text"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            second name{" "}
-            <input
-              name="secondName"
-              type="text"
-              value={this.state.secondName}
-              onChange={this.handleChange}
-            />
-          </label>
-        </form>
+        <ColorPicker options={colorPickerOptions} />
       </>
     );
     // const { todos } = this.state;
@@ -72,7 +45,6 @@ class App extends Component {
     //       <p>Total number of todo: {totatTodosCount}</p>
     //       <p>Total of completed: {completedTodosCount}</p>
     //     </div>
-
     //     <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
     //   </>
     // );
