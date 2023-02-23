@@ -1,13 +1,27 @@
+import classNames from "classnames";
 import "./TodoList.css";
 
-const TodoList = ({ todos, onDeleteTodo }) => {
+const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => {
   return (
     <ul className="TodoList">
-      {todos.map(({ id, text }) => {
+      {todos.map(({ id, text, completed }) => {
         return (
-          <li key={id} className="TodoList__item">
+          <li
+            key={id}
+            className={classNames("TodoList__item", {
+              "TodoList__item--completed": completed,
+            })}
+          >
+            <input
+              type="checkbox"
+              className="TodoList__checkbox"
+              checked={completed}
+              onChange={() => onToggleCompleted(id)}
+            ></input>
             <p className="TodoList__text">{text}</p>{" "}
-            <button onClick={() => onDeleteTodo(id)}>delete</button>
+            <button className="TodoList__btn" onClick={() => onDeleteTodo(id)}>
+              delete
+            </button>
           </li>
         );
       })}

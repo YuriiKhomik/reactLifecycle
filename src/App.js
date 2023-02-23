@@ -1,57 +1,130 @@
+import { nanoid } from "nanoid";
 // import Counter from "./Components/Counter";
 // import Dropdown from "./Components/Dropdown";
-import ColorPicker from "./Components/Colorpicker";
-import colorPickerOptions from "./Components/Colorpicker/colorPickerOptions";
+// import ColorPicker from "./Components/Colorpicker";
+// import colorPickerOptions from "./Components/Colorpicker/colorPickerOptions";
 import { Component } from "react";
-// import TodoList from "./Components/TodoList";
+import TodoEditor from "./Components/TodoEditor/TodoEditor";
+import TodoList from "./Components/TodoList";
 import initialTodos from "./Components/TodoList/todos.json";
-import Form from "./Components/Form";
+// import Form from "./Components/Form";
 
 class App extends Component {
   state = {
-    // todos: initialTodos,
+    todos: initialTodos,
   };
 
-  formSubmitHandler = (submitData) => {
-    console.log(submitData);
+  addTodo = (message) => {
+    const todo = {
+      id: nanoid(),
+      text: message,
+      completed: false,
+    };
+
+    this.setState((prevState) => ({ todos: [todo, ...prevState.todos] }));
   };
-  // deleteTodo = (todoId) => {
-  //   this.setState((prevState) => ({
-  //     todos: prevState.todos.filter((todo) => todo.id !== todoId),
-  //   }));
-  // };
+
+  deleteTodo = (todoId) => {
+    this.setState((prevState) => ({
+      todos: prevState.todos.filter((todo) => todo.id !== todoId),
+    }));
+  };
+
+  toggleCompleted = (todoId) => {
+    console.log(todoId);
+    // this.setState((prevState) => ({
+    //   todos: prevState.todos.map((todo) => {
+    //     if (todo.id === todoId) {
+    //       return {
+    //         ...todo,
+    //         completed: !todo.completed,
+    //       };
+    //     }
+    //     return todo;
+    //   }),
+    // }));
+    // or via ternarry operator
+
+    this.setState(({ todos }) => ({
+      todos: todos.map((todo) =>
+        todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
+      ),
+    }));
+  };
 
   render() {
-    // return (
-    //   <>
-    //     <Form onSubmit={this.formSubmitHandler} />
-    //   </>
-    // );
+    const { todos } = this.state;
+    // const completedTodos = todos.filter((todo) => todo.completed);
+    const totatTodosCount = todos.length;
+    const completedTodosCount = todos.reduce(
+      (acc, todo) => (todo.completed ? acc + 1 : acc),
+      0
+    );
     return (
       <>
-        <ColorPicker options={colorPickerOptions} />
+        <div>
+          <p>Total number of todo: {totatTodosCount}</p>
+          <p>Total of completed: {completedTodosCount}</p>
+        </div>
+        <TodoEditor onSubmit={this.addTodo} />
+
+        <TodoList
+          todos={todos}
+          onDeleteTodo={this.deleteTodo}
+          onToggleCompleted={this.toggleCompleted}
+        />
       </>
     );
-    // const { todos } = this.state;
-    // // const completedTodos = todos.filter((todo) => todo.completed);
-    // const totatTodosCount = todos.length;
-    // const completedTodosCount = todos.reduce(
-    //   (acc, todo) => (todo.completed ? acc + 1 : acc),
-    //   0
-    // );
-    // return (
-    //   <>
-    //     <div>
-    //       <p>Total number of todo: {totatTodosCount}</p>
-    //       <p>Total of completed: {completedTodosCount}</p>
-    //     </div>
-    //     <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
-    //   </>
-    // );
   }
 }
 
 export default App;
+
+// class App extends Component {
+// state = {
+//   todos: initialTodos,
+// };
+
+//   // formSubmitHandler = (submitData) => {
+//   //   console.log(submitData);
+//   // };
+// deleteTodo = (todoId) => {
+//   this.setState((prevState) => ({
+//     todos: prevState.todos.filter((todo) => todo.id !== todoId),
+//   }));
+// };
+
+//   render() {
+//     // return (
+//     //   <>
+//     //     <Form onSubmit={this.formSubmitHandler} />
+//     //   </>
+//     // );
+//     // return (
+//     //   <>
+//     //     <ColorPicker options={colorPickerOptions} />
+//     //   </>
+//     // );
+//     const { todos } = this.state;
+//     // const completedTodos = todos.filter((todo) => todo.completed);
+//     const totatTodosCount = todos.length;
+//     const completedTodosCount = todos.reduce(
+//       (acc, todo) => (todo.completed ? acc + 1 : acc),
+//       0
+//     );
+//     return (
+//       <>
+//         <div>
+//           <p>Total number of todo: {totatTodosCount}</p>
+//           <p>Total of completed: {completedTodosCount}</p>
+//         </div>
+//         <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
+//       </>
+//     );
+//   }
+// }
+
+// export default App;
 
 // export class App extends Component {
 // state = {
