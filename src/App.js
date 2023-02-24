@@ -4,11 +4,12 @@ import { nanoid } from "nanoid";
 // import ColorPicker from "./Components/Colorpicker";
 // import colorPickerOptions from "./Components/Colorpicker/colorPickerOptions";
 import { Component } from "react";
-import TodoEditor from "./Components/TodoEditor/TodoEditor";
-import TodoList from "./Components/TodoList";
+// import TodoEditor from "./Components/TodoEditor/TodoEditor";
+// import TodoList from "./Components/TodoList";
 import initialTodos from "./Components/TodoList/todos.json";
 // import Form from "./Components/Form";
-import Filter from "./Components/Filter";
+// import Filter from "./Components/Filter";
+import LoginForm from "./Components/LoginForm";
 
 class App extends Component {
   state = {
@@ -76,14 +77,14 @@ class App extends Component {
   };
 
   render() {
-    const { todos } = this.state;
-    const completedTodos = this.getCompletedTodoCount();
-    const totatTodosCount = todos.length;
-    const visibleTodos = this.getVisibleTodos();
+    // const { todos } = this.state;
+    // const completedTodos = this.getCompletedTodoCount();
+    // const totatTodosCount = todos.length;
+    // const visibleTodos = this.getVisibleTodos();
 
     return (
       <>
-        <div>
+        {/* <div>
           <p>Total number of todo: {totatTodosCount}</p>
           <p>Total of completed: {completedTodos}</p>
         </div>
@@ -94,8 +95,8 @@ class App extends Component {
         <TodoList
           todos={visibleTodos}
           onDeleteTodo={this.deleteTodo}
-          onToggleCompleted={this.toggleCompleted}
-        />
+          onToggleCompleted={this.toggleCompleted} */}
+        <LoginForm />
       </>
     );
   }
