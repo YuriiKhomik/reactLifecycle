@@ -8,10 +8,12 @@ import TodoEditor from "./Components/TodoEditor/TodoEditor";
 import TodoList from "./Components/TodoList";
 import initialTodos from "./Components/TodoList/todos.json";
 // import Form from "./Components/Form";
+import Filter from "./Components/Filter";
 
 class App extends Component {
   state = {
     todos: initialTodos,
+    filter: "",
   };
 
   addTodo = (message) => {
@@ -52,24 +54,45 @@ class App extends Component {
     }));
   };
 
+  changeFilter = (e) => {
+    this.setState({
+      filter: e.target.value,
+    });
+  };
+
+  getVisibleTodos = () => {
+    const { filter, todos } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+
+    return todos.filter((todo) =>
+      todo.text.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  getCompletedTodoCount = () => {
+    const { todos } = this.state;
+    // todos.filter((todo) => todo.completed);
+    return todos.reduce((acc, todo) => (todo.completed ? acc + 1 : acc), 0);
+  };
+
   render() {
     const { todos } = this.state;
-    // const completedTodos = todos.filter((todo) => todo.completed);
+    const completedTodos = this.getCompletedTodoCount();
     const totatTodosCount = todos.length;
-    const completedTodosCount = todos.reduce(
-      (acc, todo) => (todo.completed ? acc + 1 : acc),
-      0
-    );
+    const visibleTodos = this.getVisibleTodos();
+
     return (
       <>
         <div>
           <p>Total number of todo: {totatTodosCount}</p>
-          <p>Total of completed: {completedTodosCount}</p>
+          <p>Total of completed: {completedTodos}</p>
         </div>
         <TodoEditor onSubmit={this.addTodo} />
 
+        <Filter onChange={this.changeFilter} value={this.state.filter} />
+
         <TodoList
-          todos={todos}
+          todos={visibleTodos}
           onDeleteTodo={this.deleteTodo}
           onToggleCompleted={this.toggleCompleted}
         />
