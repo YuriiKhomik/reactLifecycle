@@ -8,8 +8,8 @@ const schema = yup.object().shape({
 });
 
 const initialValues = {
-  login: "1",
-  password: "2",
+  login: "",
+  password: "",
 };
 
 const Input = styled(Field)`
@@ -21,6 +21,7 @@ const LoginForm = () => {
     console.log(values);
     resetForm();
   };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -41,7 +42,6 @@ const LoginForm = () => {
     </Formik>
   );
 };
-
 export default LoginForm;
 
 // const LoginForm = () => {
