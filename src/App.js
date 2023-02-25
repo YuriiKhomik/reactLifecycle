@@ -1,15 +1,16 @@
 import { nanoid } from "nanoid";
+import { Component } from "react";
 // import Counter from "./Components/Counter";
 // import Dropdown from "./Components/Dropdown";
 // import ColorPicker from "./Components/Colorpicker";
 // import colorPickerOptions from "./Components/Colorpicker/colorPickerOptions";
-import { Component } from "react";
 // import TodoEditor from "./Components/TodoEditor/TodoEditor";
 // import TodoList from "./Components/TodoList";
 import initialTodos from "./Components/TodoList/todos.json";
 // import Form from "./Components/Form";
 // import Filter from "./Components/Filter";
-import LoginForm from "./Components/LoginForm";
+// import LoginForm from "./Components/LoginForm";
+// import ProductReviewForm from "./Components/ProductReviewForm";
 
 class App extends Component {
   state = {
@@ -96,7 +97,8 @@ class App extends Component {
           todos={visibleTodos}
           onDeleteTodo={this.deleteTodo}
           onToggleCompleted={this.toggleCompleted} */}
-        <LoginForm />
+        {/* <LoginForm /> */}
+        {/* <ProductReviewForm /> */}
       </>
     );
   }
