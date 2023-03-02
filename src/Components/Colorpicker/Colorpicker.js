@@ -1,11 +1,15 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import classNames from "classnames";
 import "./ColorPicker.css";
 
-class ColorPicker extends Component {
+class ColorPicker extends PureComponent {
   state = {
     activeOptionIdx: 3,
   };
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextState.activeOptionIdx !== this.state.activeOptionIdx;
+  // }
   setActiveIdx = (index) => {
     this.setState({
       activeOptionIdx: index,
@@ -23,6 +27,7 @@ class ColorPicker extends Component {
     });
   };
   render() {
+    console.log(`rerender @ ${Date.now()}`);
     const { options } = this.props;
     const { activeOptionIdx } = this.state;
     const { label } = options[activeOptionIdx];
