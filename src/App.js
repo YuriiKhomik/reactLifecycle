@@ -9,10 +9,12 @@ import TodoList from "./Components/TodoList";
 import initialTodos from "./Components/TodoList/todos.json";
 // import Form from "./Components/Form";
 import Filter from "./Components/Filter";
-// import Modal from "./Components/Modal";
+import Modal from "./Components/Modal";
 // import LoginForm from "./Components/LoginForm";
 // import ProductReviewForm from "./Components/ProductReviewForm";
 // import Clock from "./Components/Clock";
+// import IconButton from "./Components/IconButton";
+// import { ReactComponent as AddIcon } from "./icons/add.svg";
 
 class App extends Component {
   state = {
@@ -110,7 +112,7 @@ class App extends Component {
 
   render() {
     // console.log("App render");
-    const { todos, filter } = this.state;
+    const { todos, filter, showModal } = this.state;
     const completedTodos = this.getCompletedTodoCount();
     const totatTodosCount = todos.length;
     const visibleTodos = this.getVisibleTodos();
@@ -129,31 +131,29 @@ class App extends Component {
           onDeleteTodo={this.deleteTodo}
           onToggleCompleted={this.toggleCompleted}
         />
+
+        <button type="button" onClick={this.toggleModal}>
+          Open modal
+        </button>
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <h1>Hey, this is content on modal as children</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
+              delectus facilis? Similique voluptatibus inventore animi hic sint
+              itaque eos alias? Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Officia, delectus facilis? Similique
+              voluptatibus inventore animi hic sint itaque eos alias?
+            </p>
+            <button type="button" onClick={this.toggleModal}>
+              Close modal
+            </button>
+          </Modal>
+        )}
+
+        {/* <Clock /> */}
+        {/* <ColorPicker options={colorPickerOptions} /> */}
       </>
-
-      // <>
-      //   <button type="button" onClick={this.toggleModal}>
-      //     Open modal
-      //   </button>
-      //   {showModal && (
-      //     <Modal onClose={this.toggleModal}>
-      //       <h1>Hey, this is content on modal as children</h1>
-      //       <p>
-      //         Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-      //         delectus facilis? Similique voluptatibus inventore animi hic sint
-      //         itaque eos alias? Lorem ipsum dolor sit amet consectetur
-      //         adipisicing elit. Officia, delectus facilis? Similique
-      //         voluptatibus inventore animi hic sint itaque eos alias?
-      //       </p>
-      //       <button type="button" onClick={this.toggleModal}>
-      //         Close modal
-      //       </button>
-      //     </Modal>
-      //   )}
-
-      //   {/* <Clock /> */}
-      //   {/* <ColorPicker options={colorPickerOptions} /> */}
-      // </>
 
       // {/* <LoginForm /> */}
       // {/* <ProductReviewForm /> */}

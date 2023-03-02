@@ -1,3 +1,6 @@
+// import { ReactComponent as DeleteIcon } from "../../icons/delete.svg";
+// import IconButton from "../IconButton";
+
 const Todo = ({ text, completed, onToggleCompleted, onDelete }) => {
   return (
     <>
@@ -11,6 +14,9 @@ const Todo = ({ text, completed, onToggleCompleted, onDelete }) => {
       <button className="TodoList__btn" onClick={onDelete}>
         delete
       </button>
+      {/* <IconButton onClick={onDelete}>
+        <DeleteIcon width="32px" height="32px" fill="black" />
+      </IconButton> */}
     </>
   );
 };
