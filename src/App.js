@@ -6,20 +6,20 @@ import { Component } from "react";
 // import colorPickerOptions from "./Components/Colorpicker/colorPickerOptions";
 import TodoEditor from "./Components/TodoEditor/TodoEditor";
 import TodoList from "./Components/TodoList";
-import initialTodos from "./Components/TodoList/todos.json";
+// import initialTodos from "./Components/TodoList/todos.json";
 // import Form from "./Components/Form";
 import Filter from "./Components/Filter";
 import Modal from "./Components/Modal";
 // import LoginForm from "./Components/LoginForm";
 // import ProductReviewForm from "./Components/ProductReviewForm";
 // import Clock from "./Components/Clock";
-// import IconButton from "./Components/IconButton";
-// import { ReactComponent as AddIcon } from "./icons/add.svg";
+import IconButton from "./Components/IconButton";
+import { ReactComponent as AddIcon } from "./icons/add.svg";
 
 class App extends Component {
   state = {
-    todos: initialTodos,
-    // todos: [],
+    // todos: initialTodos,
+    todos: [],
     filter: "",
     showModal: false,
   };
@@ -43,6 +43,13 @@ class App extends Component {
     if (this.state.todos !== prevState.todos) {
       localStorage.setItem("todos", JSON.stringify(this.state.todos));
     }
+
+    // const nextTodos = this.state.todos;
+    // const prevTodos = prevState.todos;
+
+    // if (nextTodos.length > prevTodos.length && prevTodos.length !== 0) {
+    //   this.toggleModal();
+    // }
   }
 
   addTodo = (message) => {
@@ -53,6 +60,7 @@ class App extends Component {
     };
 
     this.setState((prevState) => ({ todos: [todo, ...prevState.todos] }));
+    this.toggleModal();
   };
 
   deleteTodo = (todoId) => {
@@ -124,7 +132,7 @@ class App extends Component {
           <p>Total number of todo: {totatTodosCount}</p>
           <p>Total of completed: {completedTodos}</p>
         </div>
-        <TodoEditor onSubmit={this.addTodo} />
+
         <Filter onChange={this.changeFilter} value={filter} />
         <TodoList
           todos={visibleTodos}
@@ -132,22 +140,16 @@ class App extends Component {
           onToggleCompleted={this.toggleCompleted}
         />
 
-        <button type="button" onClick={this.toggleModal}>
-          Open modal
-        </button>
+        <IconButton
+          type="button"
+          onClick={this.toggleModal}
+          aria-label="Add todo"
+        >
+          <AddIcon />
+        </IconButton>
         {showModal && (
-          <Modal onClose={this.toggleModal}>
-            <h1>Hey, this is content on modal as children</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-              delectus facilis? Similique voluptatibus inventore animi hic sint
-              itaque eos alias? Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Officia, delectus facilis? Similique
-              voluptatibus inventore animi hic sint itaque eos alias?
-            </p>
-            <button type="button" onClick={this.toggleModal}>
-              Close modal
-            </button>
+          <Modal todos={todos} onClose={this.toggleModal}>
+            <TodoEditor onSubmit={this.addTodo} />
           </Modal>
         )}
 
